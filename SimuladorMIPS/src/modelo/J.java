@@ -3,11 +3,13 @@ package modelo;
 public class J extends Instrucao {
 	private int op;
 	private int endereco;
+	private String nomeVariavel;
 	
-	public J() {}
+	public J() {
+		this.op = 2;
+	}
 	
 	public J(int endereco) {
-		this.op = 2;
 		this.endereco = endereco;
 	}
 	
@@ -22,5 +24,13 @@ public class J extends Instrucao {
 	}
 	public void setEndereco(int endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNomeVariavel() {
+		return nomeVariavel;
+	}
+
+	public void setNomeVariavel(String nomeVariavel) {
+		this.nomeVariavel = nomeVariavel;
 	}
 }

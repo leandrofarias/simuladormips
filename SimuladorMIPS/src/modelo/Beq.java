@@ -2,29 +2,17 @@ package modelo;
 
 public class Beq extends Instrucao {
 	private int op;
-	private int rs;
-	private int rt;
+	private Registrador rs;
+	private Registrador rt;
 	private int endereco;
+	private String nomeVariavel;
 	
-	public Beq() {}
-	
-	public Beq(int rs, int rt, int endereco) {
+	public Beq() {
 		this.op = 4;
-		this.rs = rs;
-		this.rt = rt;
-		this.endereco = endereco;
 	}
 
 	public int getOp() {
 		return op;
-	}
-
-	public int getRs() {
-		return rs;
-	}
-
-	public int getRt() {
-		return rt;
 	}
 
 	public int getEndereco() {
@@ -35,15 +23,31 @@ public class Beq extends Instrucao {
 		this.op = op;
 	}
 
-	public void setRs(int rs) {
+	public void setEndereco(int endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNomeVariavel() {
+		return nomeVariavel;
+	}
+
+	public void setNomeVariavel(String nomeVariavel) {
+		this.nomeVariavel = nomeVariavel;
+	}
+
+	public Registrador getRs() {
+		return rs;
+	}
+
+	public void setRs(Registrador rs) {
 		this.rs = rs;
 	}
 
-	public void setRt(int rt) {
-		this.rt = rt;
+	public Registrador getRt() {
+		return rt;
 	}
 
-	public void setEndereco(int endereco) {
-		this.endereco = endereco;
+	public void setRt(Registrador rt) {
+		this.rt = rt;
 	}
 }

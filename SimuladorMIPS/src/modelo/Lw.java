@@ -2,28 +2,24 @@ package modelo;
 
 public class Lw extends Instrucao {
 	private int op;
-	private int rs;
-	private int rt;
+	private Registrador rs;
+	private Registrador rt;
 	private int endereco;
+	private String nomeVariavel;
 	
-	public Lw() {}
-	
-	public Lw(int rs, int rt, int endereco) {
+	public Lw() {
 		this.op = 35;
-		this.rs = rs;
-		this.rt = rt;
-		this.endereco = endereco;
 	}
 
 	public int getOp() {
 		return op;
 	}
 
-	public int getRs() {
+	public Registrador getRs() {
 		return rs;
 	}
 
-	public int getRt() {
+	public Registrador getRt() {
 		return rt;
 	}
 
@@ -35,15 +31,23 @@ public class Lw extends Instrucao {
 		this.op = op;
 	}
 
-	public void setRs(int rs) {
+	public void setRs(Registrador rs) {
 		this.rs = rs;
 	}
 
-	public void setRt(int rt) {
+	public void setRt(Registrador rt) {
 		this.rt = rt;
 	}
 
 	public void setEndereco(int endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getNomeVariavel() {
+		return nomeVariavel;
+	}
+
+	public void setNomeVariavel(String nomeVariavel) {
+		this.nomeVariavel = nomeVariavel;
 	}
 }

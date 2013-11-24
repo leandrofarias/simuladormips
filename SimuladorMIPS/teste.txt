@@ -10,4 +10,4 @@ result:
 main:
 lw $t0,a
 add $t1,$t0,$t0
-sw $t1, result
+sw $t1,result

@@ -2,37 +2,20 @@ package modelo;
 
 public class Or extends Instrucao {
 	private int op;
-	private int rs;
-	private int rt;
-	private int rd;
+	private Registrador rs;
+	private Registrador rt;
+	private Registrador rd;
 	private int shamt;
 	private int funct;
 	
-	public Or() {}
-	
-	public Or(int rs, int rt, int rd) {
+	public Or() {
 		this.op = 0;
-		this.rs = rs;
-		this.rt = rt;
-		this.rd = rd;
 		this.shamt = 0;
 		this.funct = 37;
 	}
 
 	public int getOp() {
 		return op;
-	}
-
-	public int getRs() {
-		return rs;
-	}
-
-	public int getRt() {
-		return rt;
-	}
-
-	public int getRd() {
-		return rd;
 	}
 
 	public int getShamt() {
@@ -47,23 +30,35 @@ public class Or extends Instrucao {
 		this.op = op;
 	}
 
-	public void setRs(int rs) {
-		this.rs = rs;
-	}
-
-	public void setRt(int rt) {
-		this.rt = rt;
-	}
-
-	public void setRd(int rd) {
-		this.rd = rd;
-	}
-
 	public void setShamt(int shamt) {
 		this.shamt = shamt;
 	}
 
 	public void setFunct(int funct) {
 		this.funct = funct;
+	}
+
+	public Registrador getRs() {
+		return rs;
+	}
+
+	public void setRs(Registrador rs) {
+		this.rs = rs;
+	}
+
+	public Registrador getRt() {
+		return rt;
+	}
+
+	public void setRt(Registrador rt) {
+		this.rt = rt;
+	}
+
+	public Registrador getRd() {
+		return rd;
+	}
+
+	public void setRd(Registrador rd) {
+		this.rd = rd;
 	}
 }
