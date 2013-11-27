@@ -184,9 +184,9 @@ public class Montador {
 		return registrador;
 	}
 	
-	public void abrirArquivo() {
+	public void abrirArquivo(String nomeArquivo) {
 		try {
-			entrada = new Scanner(new File("teste.txt"));
+			entrada = new Scanner(new File(nomeArquivo));
 		} catch (FileNotFoundException e) {
 			System.err.println( "Erro ao abrir o arquivo." );
 	        System.exit(1);
@@ -223,11 +223,25 @@ public class Montador {
 			System.out.println("SINTAXE ERRADA!");
 		}
 		
+		List<String> listaMarcadores = new ArrayList<String>();
+		int enderecoMemoria = 0;
+		boolean encontreiMarcador = false;
+		int instrucaoAposMarcador = -1;
+		Instrucao instrucaoAnterior = null, ultimaInstrucao = null;
+		
 		if (entrada.next().equals(".globl") && entrada.next().equals("main") && entrada.next().equals("main:")) {
 			while (entrada.hasNext()) {
 				String operacao = entrada.next();
 				if (!operacao.endsWith(":")) {
 					Instrucao instrucao = this.getInstrucao(operacao);
+					instrucao.setEnderecoMemoria(enderecoMemoria);
+					enderecoMemoria += 4;
+					
+					if (encontreiMarcador) {
+						instrucaoAposMarcador = instrucao.getEnderecoMemoria();
+						encontreiMarcador = false;
+					}
+					
 					if (!operacao.equals("j")) {
 						StringTokenizer operacaoParte2 = new StringTokenizer(entrada.next());
 						String reg1 = operacaoParte2.nextToken(",").trim();
@@ -312,12 +326,31 @@ public class Montador {
 							}
 						}
 					} else {
-						// Implementar a instrução J.
+						if (instrucao instanceof J) {
+							((J) instrucao).setNomeVariavel(entrada.next());
+							instrucao.setEnderecoProximaInstrucao(instrucaoAposMarcador);
+						}
+					}
+
+					//add na memoria de instrucoes
+					if (!(instrucao instanceof J)) {
+						if (instrucaoAnterior == null) {
+							instrucaoAnterior = instrucao;
+						} else {
+							instrucaoAnterior.setEnderecoProximaInstrucao(instrucao.getEnderecoMemoria());
+							memoriaInstrucoes.adicionarInstrucao(instrucaoAnterior);
+							instrucaoAnterior = instrucao;
+							ultimaInstrucao = instrucao;
+						}
 					}
 				} else {
-					System.out.println("LOOP:");
+					StringTokenizer marcador = new StringTokenizer(operacao);
+					listaMarcadores.add(marcador.nextToken(":"));
+					encontreiMarcador = true;
 				}
 			}
+			
+			memoriaInstrucoes.adicionarInstrucao(ultimaInstrucao);
 		}
 	}
 	
@@ -335,20 +368,35 @@ public class Montador {
 		this.idRegistrador++;
 	}
 	
+	public void montar(String nomeArquivo, List<Variavel> listaVariaveis, MemoriaInstrucoes memoriaInstrucoes, BancoRegistradores bancoRegistradores) {
+		this.abrirArquivo(nomeArquivo);
+		this.lerDados(listaVariaveis, memoriaInstrucoes, bancoRegistradores);
+		this.fecharArquivo();
+	}
+	
 	public static void main(String[] args) {
 		Montador m = new Montador();
 		List<Variavel> lista = new ArrayList<Variavel>();
 		
 		MemoriaInstrucoes memoriaInstrucoes = new MemoriaInstrucoes();
 		BancoRegistradores bancoRegistradores = new BancoRegistradores();
-		m.abrirArquivo();
-		m.lerDados(lista, memoriaInstrucoes, bancoRegistradores);
-		m.fecharArquivo();
-		for (Variavel b : lista) {
-			//System.out.println(b.getNome());
-			for (int c : b.getValores()) {
-				//System.out.println(c);
+		
+		m.montar("teste.txt", lista, memoriaInstrucoes, bancoRegistradores);
+		int count = 0;
+		for (int i = 1; i <= memoriaInstrucoes.getSizeMemoria(); i++) {
+			Instrucao ins = memoriaInstrucoes.getInstrucao(count);
+			if (ins instanceof Add) {
+				System.out.println("OpAdd: " + ((Add) ins).getOp());
+				System.out.println("RegDAdd: " + ((Add) ins).getRd().getNome());
+			} else if (ins instanceof Lw) {
+				System.out.println("OpLw: " + ((Lw) ins).getOp());
+			} else if (ins instanceof Sw) {
+				System.out.println("OpSw: " + ((Sw) ins).getOp());
+			} else if (ins instanceof Sub) {
+				System.out.println("OpSub: " + ((Sub) ins).getOp());
+				System.out.println("RegDSub: " + ((Sub) ins).getRd().getValor());
 			}
+			count += 4;
 		}
 	}
 	

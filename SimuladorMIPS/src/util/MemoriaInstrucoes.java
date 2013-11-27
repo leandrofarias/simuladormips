@@ -30,4 +30,8 @@ public class MemoriaInstrucoes {
 	public void setInstrucoes(HashMap<Integer, Instrucao> instrucoes) {
 		this.instrucoes = instrucoes;
 	}
+	
+	public int getSizeMemoria() {
+		return this.instrucoes.size();
+	}
 }

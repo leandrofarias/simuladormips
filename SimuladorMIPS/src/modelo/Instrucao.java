@@ -4,6 +4,14 @@ public class Instrucao {
 	protected int enderecoMemoria;
 	protected int enderecoProximaInstrucao;
 
+	public int getEnderecoProximaInstrucao() {
+		return enderecoProximaInstrucao;
+	}
+
+	public void setEnderecoProximaInstrucao(int enderecoProximaInstrucao) {
+		this.enderecoProximaInstrucao = enderecoProximaInstrucao;
+	}
+
 	public int getEnderecoMemoria() {
 		return enderecoMemoria;
 	}
