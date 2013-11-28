@@ -12,12 +12,13 @@ public class BancoRegistradores {
 	}
 	
 	public void adicionarRegistrador(Registrador registrador) {
-		this.bancoRegistradores.put(registrador.getId(), registrador);
+		if (!this.bancoRegistradores.containsKey(registrador.getNumero()))
+				this.bancoRegistradores.put(registrador.getNumero(), registrador);
 	}
 	
-	public Registrador getRegistrador(int id) {
-		if (this.bancoRegistradores.containsKey(id)) {
-			return this.bancoRegistradores.get(id);
+	public Registrador getRegistrador(int numero) {
+		if (this.bancoRegistradores.containsKey(numero)) {
+			return this.bancoRegistradores.get(numero);
 		}
 		
 		return null;

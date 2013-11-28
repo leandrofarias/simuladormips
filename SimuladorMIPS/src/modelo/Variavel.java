@@ -1,18 +1,26 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Variavel {
 	private String nome;
-	private List<Integer> valores;
+	private ArrayList<Integer> valores;
 	
 	public Variavel() {
 		this.valores = new ArrayList<Integer>();
 	}
 	
 	public void adicionarValor(int valor) {
-		valores.add(valor);
+		this.valores.add(valor);
+	}
+	
+	public void setValor( int novoValor, int id ) {
+		this.valores.set( id, novoValor );
+	}
+	
+	public int getValor( int posicaoMemoria ) {
+		return this.valores.get( posicaoMemoria );
 	}
 
 	public String getNome() {
@@ -21,14 +29,6 @@ public class Variavel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Integer> getValores() {
-		return valores;
-	}
-
-	public void setValores(List<Integer> valores) {
-		this.valores = valores;
 	}
 
 }

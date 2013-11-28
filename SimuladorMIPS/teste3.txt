@@ -1,0 +1,21 @@
+.data
+.globl a
+a:
+.word 1
+.globl result
+result:
+.word 0
+.globl result2
+result2:
+.word 0
+.text
+.globl main
+main:
+lw $t0,a($zero)
+add $t1,$t0,$t0
+or $t2,$t1,$t0
+beq $t2,$t2,100
+sub $t1,$t2,$t1
+100:
+sw $t1,result($zero)
+sw $t2,result2($zero)

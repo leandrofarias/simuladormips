@@ -17,7 +17,7 @@ public class SinalControle {
 	public void modificarValor( String valor ) {
 		
 		this.valor = valor;
-		this.ativo = ativo;
+		this.ativo = true;
 		
 	}
 	

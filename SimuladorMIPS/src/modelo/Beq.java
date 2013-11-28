@@ -5,7 +5,6 @@ public class Beq extends Instrucao {
 	private Registrador rs;
 	private Registrador rt;
 	private int endereco;
-	private String nomeVariavel;
 	
 	public Beq() {
 		this.op = 4;
@@ -25,14 +24,6 @@ public class Beq extends Instrucao {
 
 	public void setEndereco(int endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getNomeVariavel() {
-		return nomeVariavel;
-	}
-
-	public void setNomeVariavel(String nomeVariavel) {
-		this.nomeVariavel = nomeVariavel;
 	}
 
 	public Registrador getRs() {

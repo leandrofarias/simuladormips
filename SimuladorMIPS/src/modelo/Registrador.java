@@ -1,15 +1,13 @@
 package modelo;
 
 public class Registrador {
-	private int id;
 	private String nome;
 	private int numero;
 	private int valor;
 	
 	public Registrador() {}
 	
-	public Registrador(int id, String nome, int numero) {
-		this.id = id;
+	public Registrador(String nome, int numero) {
 		this.nome = nome;
 		this.numero = numero;
 	}
@@ -39,11 +37,11 @@ public class Registrador {
 	}
 
 	public int getId() {
-		return id;
+		return numero;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.numero = id;
 	}
 	
 	
